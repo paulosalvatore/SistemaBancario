@@ -1,0 +1,57 @@
+Tabela Usuarios
+	id (int - 11, Primary, AI)
+	nome (varchar - 255)
+	email (varchar - 255)
+	senha (varchar - 255)
+	agencia_id (int - 11) - FK Agencias
+	administrador (tinyint - 1, default = 0)
+	ativo (tinyint - 1, default = 1)
+	criado (datetime - default CURRENT_TIMESTAMP)
+	modificado (datetime - default CURRENT_TIMESTAMP)
+
+Tabela UsuariosLogin
+	id (int - 11, AI, Primary)
+	usuario_id (int - 11) - FK Usuarios
+	data (datetime - default CURRENT_TIMESTAMP)
+
+Tabela Agencias
+	id (int - 11, Primary, AI)
+	numero (varchar - 255)
+	nome (varchar - 255)
+	ativo (tinyint - 1, default = 1)
+	criado (datetime - default CURRENT_TIMESTAMP)
+	modificado (datetime - default CURRENT_TIMESTAMP)
+
+Tabela Caixas
+	id (int - 11, Primary, AI)
+	agencia_id (int - 11)
+	ativo (tinyint - 1, default = 1)
+	criado (datetime - default CURRENT_TIMESTAMP)
+	modificado (datetime - default CURRENT_TIMESTAMP)
+
+Tabela CaixasNotas
+	id (int - 11, Primary, AI)
+	caixa_id (int - 11) - FK Caixas
+	valor (int - 11)
+	quantidade (int - 11)
+	ativo (tinyint - 1, default = 1)
+	criado (datetime - default CURRENT_TIMESTAMP)
+	modificado (datetime - default CURRENT_TIMESTAMP)
+
+Tabela Contas
+	id (int - 11, Primary, AI)
+	agencia_id (int - 11) - FK Agencias
+	numero (varchar - 255)
+	saldo (decimal - 10,2)
+	usuario_id (int - 11) - FK Usuarios
+	ativo (tinyint - 1, default = 1)
+	criado (datetime - default CURRENT_TIMESTAMP)
+	modificado (datetime - default CURRENT_TIMESTAMP)
+
+Tabela Transacoes
+	id (int - 11, Primary, AI)
+	conta_id (int - 11) - FK Contas
+	conta_destino_id (int - 11) - FK Contas
+	valor (decimal - 10,2)
+	data (datetime)
+	criado (datetime - default CURRENT_TIMESTAMP)
