@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 17-Ago-2017 às 14:21
+-- Generation Time: 24-Ago-2017 às 14:45
 -- Versão do servidor: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -53,6 +53,18 @@ CREATE TABLE `usuarios` (
   `modificado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `usuarios_login`
+--
+
+CREATE TABLE `usuarios_login` (
+  `id` int(11) NOT NULL,
+  `usuario_id` int(11) NOT NULL,
+  `data` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
@@ -71,6 +83,13 @@ ALTER TABLE `usuarios`
   ADD KEY `agencia_id` (`agencia_id`);
 
 --
+-- Indexes for table `usuarios_login`
+--
+ALTER TABLE `usuarios_login`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `usuario_id` (`usuario_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -85,6 +104,11 @@ ALTER TABLE `agencias`
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `usuarios_login`
+--
+ALTER TABLE `usuarios_login`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- Constraints for dumped tables
 --
 
@@ -93,6 +117,12 @@ ALTER TABLE `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`agencia_id`) REFERENCES `agencias` (`id`);
+
+--
+-- Limitadores para a tabela `usuarios_login`
+--
+ALTER TABLE `usuarios_login`
+  ADD CONSTRAINT `usuarios_login_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
