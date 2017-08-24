@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 24-Ago-2017 às 14:45
+-- Generation Time: 24-Ago-2017 às 17:21
 -- Versão do servidor: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -35,6 +35,13 @@ CREATE TABLE `agencias` (
   `modificado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `agencias`
+--
+
+INSERT INTO `agencias` (`id`, `numero`, `nome`, `ativo`, `criado`, `modificado`) VALUES
+(1, '1213', 'Lins', 1, '2017-08-24 12:03:10', '2017-08-24 12:03:10');
+
 -- --------------------------------------------------------
 
 --
@@ -52,6 +59,13 @@ CREATE TABLE `usuarios` (
   `criado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modificado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `agencia_id`, `administrador`, `ativo`, `criado`, `modificado`) VALUES
+(1, 'Paulo', 'Salvatore', '1234', 1, 1, 0, '2017-08-24 12:03:27', '2017-08-24 12:03:27');
 
 -- --------------------------------------------------------
 
@@ -97,12 +111,12 @@ ALTER TABLE `usuarios_login`
 -- AUTO_INCREMENT for table `agencias`
 --
 ALTER TABLE `agencias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `usuarios_login`
 --
