@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 24-Ago-2017 às 17:21
+-- Generation Time: 31-Ago-2017 às 13:13
 -- Versão do servidor: 10.1.19-MariaDB
 -- PHP Version: 7.0.13
 
@@ -41,6 +41,20 @@ CREATE TABLE `agencias` (
 
 INSERT INTO `agencias` (`id`, `numero`, `nome`, `ativo`, `criado`, `modificado`) VALUES
 (1, '1213', 'Lins', 1, '2017-08-24 12:03:10', '2017-08-24 12:03:10');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `caixas`
+--
+
+CREATE TABLE `caixas` (
+  `id` int(11) NOT NULL,
+  `agencia_id` int(11) NOT NULL,
+  `ativo` tinyint(1) NOT NULL DEFAULT '1',
+  `criado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modificado` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -90,6 +104,13 @@ ALTER TABLE `agencias`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `caixas`
+--
+ALTER TABLE `caixas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `agencia_id` (`agencia_id`);
+
+--
 -- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -113,6 +134,11 @@ ALTER TABLE `usuarios_login`
 ALTER TABLE `agencias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `caixas`
+--
+ALTER TABLE `caixas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -125,6 +151,12 @@ ALTER TABLE `usuarios_login`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Limitadores para a tabela `caixas`
+--
+ALTER TABLE `caixas`
+  ADD CONSTRAINT `caixas_ibfk_1` FOREIGN KEY (`agencia_id`) REFERENCES `agencias` (`id`);
 
 --
 -- Limitadores para a tabela `usuarios`
