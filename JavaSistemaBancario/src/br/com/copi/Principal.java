@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.paulosalvatore;
+package br.com.copi;
 
-import br.com.paulosalvatore.conexao.Conectar;
+import br.com.copi.conexao.Conectar;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;

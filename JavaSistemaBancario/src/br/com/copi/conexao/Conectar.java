@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.List;
 
 /**
@@ -16,9 +17,11 @@ import java.util.List;
  * @author logonpf
  */
 public class Conectar {
+
     private static Connection conexao = null;
     private static PreparedStatement preparedStatement = null;
     private static ResultSet resultSet = null;
+    private static Statement statement = null;
 
     private static final String HOST = "localhost";
     private static final String PORTA = "3306";
@@ -41,61 +44,84 @@ public class Conectar {
             Class.forName(driver);
             conexao = DriverManager.getConnection(url, USUARIO, SENHA);
             return conexao;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e);
             return null;
         }
     }
-    
-    public static ResultSet buscarRegistro(String tabela, List<String> campos, List<String> valores) {
-        return buscarRegistro(tabela, campos, valores, "AND");
-    }
 
-    public static ResultSet buscarRegistro(String tabela, List<String> campos, List<String> valores, String uniaoWhere) {
-        String sql = "SELECT * FROM " + tabela + " WHERE ";
+    public static void inserirRegistro(String tabela, List<String> colunas, List<String> valores) {
+        String sql = "INSERT INTO " + tabela + "(";
 
-        for (int i = 0; i < campos.size(); i++) {
-            String campo = campos.get(i);
-            String valor = valores.get(i);
+        for (int chave = 0; chave < colunas.size(); chave++) {
+            String coluna = colunas.get(chave);
 
-            sql += campo + " LIKE '" + valor + "'";
+            sql += coluna;
 
-            if (i < campos.size() - 1)
-                sql += " " + uniaoWhere + " ";
+            if (chave < colunas.size() - 1) {
+                sql += ", ";
+            }
+
+            System.out.println(sql);
         }
+
+        sql += ") VALUES (";
+
+        for (int chave = 0; chave < valores.size(); chave++) {
+            String valor = valores.get(chave);
+
+            sql += "'" + valor + "'";
+
+            if (chave < valores.size() - 1) {
+                sql += ", ";
+            }
+
+            System.out.println(sql);
+        }
+
+        sql += ");";
 
         System.out.println(sql);
 
         conexao = Conectar.iniciarConexao();
 
-        resultSet = null;
-
         try {
-            preparedStatement = conexao.prepareStatement(sql);
-
-            resultSet = preparedStatement.executeQuery();
-        }
-        catch (Exception e) {
+            statement = conexao.createStatement();
+            statement.executeUpdate(sql);
+            System.out.println("Registro adicionado com sucesso.");
+        } catch (Exception e) {
             System.out.println(e);
         }
-
-        return resultSet;
     }
 
-    public static int pegarQuantidadeResultados(ResultSet resultSet) {
-        int quantidadeResultados = 0;
+    public static void atualizarRegistro(String tabela, int id, List<String> colunas, List<String> valores) {
+        String sql = "UPDATE " + tabela + " SET (";
+
+        for (int chave = 0; chave < colunas.size(); chave++) {
+            String coluna = colunas.get(chave);
+            String valor = valores.get(chave);
+
+            sql += coluna + " = '" + valor + "'";
+
+            if (chave < colunas.size() - 1) {
+                sql += ", ";
+            }
+
+            System.out.println(sql);
+        }
+
+        sql += ") WHERE id = " + id + ";";
+
+        System.out.println(sql);
+
+        conexao = Conectar.iniciarConexao();
 
         try {
-            if (resultSet.last()) {
-                quantidadeResultados = resultSet.getRow();
-                resultSet.beforeFirst();
-            }
-        }
-        catch (Exception e) {
+            statement = conexao.createStatement();
+            statement.executeUpdate(sql);
+            System.out.println("Registro adicionado com sucesso.");
+        } catch (Exception e) {
             System.out.println(e);
         }
-
-        return quantidadeResultados;
     }
 }
