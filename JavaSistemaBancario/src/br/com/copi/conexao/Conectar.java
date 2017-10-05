@@ -10,6 +10,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -94,8 +97,15 @@ public class Conectar {
         }
     }
 
-    public static void atualizarRegistro(String tabela, int id, List<String> colunas, List<String> valores) {
-        String sql = "UPDATE " + tabela + " SET (";
+    public static void editarRegistro(String tabela, int id, List<String> colunas, List<String> valores) {
+        String sql = "UPDATE " + tabela + " SET ";
+
+        Date dataUtil = new Date();
+        Timestamp dataSql = new Timestamp(dataUtil.getTime());
+        String data = dataSql.toString();
+
+        colunas.add("modificado");
+        valores.add(data);
 
         for (int chave = 0; chave < colunas.size(); chave++) {
             String coluna = colunas.get(chave);
@@ -110,7 +120,7 @@ public class Conectar {
             System.out.println(sql);
         }
 
-        sql += ") WHERE id = " + id + ";";
+        sql += " WHERE id = " + id + ";";
 
         System.out.println(sql);
 
@@ -119,9 +129,19 @@ public class Conectar {
         try {
             statement = conexao.createStatement();
             statement.executeUpdate(sql);
-            System.out.println("Registro adicionado com sucesso.");
+            System.out.println("Registro editado com sucesso.");
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+    
+    public static void deletarRegistro(String tabela, int id) {
+        List<String> colunas = new ArrayList<>();
+        colunas.add("ativo");
+        
+        List<String> valores = new ArrayList<>();
+        valores.add("0");
+        
+        editarRegistro(tabela, id, colunas, valores);
     }
 }
