@@ -53,7 +53,7 @@ public class Conectar {
         }
     }
 
-    public static void inserirRegistro(String tabela, List<String> colunas, List<String> valores) {
+    public static boolean inserirRegistro(String tabela, List<String> colunas, List<String> valores) {
         String sql = "INSERT INTO " + tabela + "(";
 
         for (int chave = 0; chave < colunas.size(); chave++) {
@@ -92,8 +92,10 @@ public class Conectar {
             statement = conexao.createStatement();
             statement.executeUpdate(sql);
             System.out.println("Registro adicionado com sucesso.");
+            return true;
         } catch (Exception e) {
             System.out.println(e);
+            return false;
         }
     }
 

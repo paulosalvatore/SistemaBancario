@@ -38,6 +38,7 @@ public class TelaLogin extends javax.swing.JFrame {
         lbFundo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Tela de Login");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbUsuario.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -82,7 +83,9 @@ public class TelaLogin extends javax.swing.JFrame {
         
         // Checa se o usuário e a senha não estão vazios
         if (!usuario.isEmpty() && !senha.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Realizar Login.");
+            new TelaPrincipal(usuario).setVisible(true);
+            
+            this.dispose();
         }
         else {
             JOptionPane.showMessageDialog(this, "Insira um usuário e uma senha.");

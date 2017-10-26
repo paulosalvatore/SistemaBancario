@@ -23,7 +23,7 @@ public class Principal {
         instanciaTelaLogin.setVisible(true);
     }
     
-    public static void adicionarAgencia() {
+    public static boolean adicionarAgencia(String numero, String nome) {
         String tabela = "agencias";
 
         List<String> colunas = new ArrayList<>();
@@ -32,16 +32,10 @@ public class Principal {
 
         List<String> valores = new ArrayList<>();
         
-        Scanner reader = new Scanner(System.in);
-        System.out.println("Digite o número da Agência:");
-        String numero = reader.next();
         valores.add(numero);
-        
-        System.out.println("Digite o nome da Agência:");
-        String nome = reader.next();
         valores.add(nome);
 
-        Conectar.inserirRegistro(tabela, colunas, valores);
+        return Conectar.inserirRegistro(tabela, colunas, valores);
     }
     
     public static void editarAgencia() {
