@@ -6,6 +6,7 @@
 package br.com.copi;
 
 import br.com.copi.conexao.Conectar;
+import br.com.copi.telas.TelaLogin;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,7 +18,9 @@ import java.util.Scanner;
 public class Principal {
 
     public static void main(String[] args) {
-        deletarAgencia();
+        //deletarAgencia();
+        TelaLogin instanciaTelaLogin = new TelaLogin();
+        instanciaTelaLogin.setVisible(true);
     }
     
     public static void adicionarAgencia() {
