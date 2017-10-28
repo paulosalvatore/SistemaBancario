@@ -40,7 +40,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         mArquivo = new javax.swing.JMenu();
         mAgencias = new javax.swing.JMenu();
-        miCadastrar = new javax.swing.JMenuItem();
+        miCadastrarAgencias = new javax.swing.JMenuItem();
+        miListarAgencias = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela Principal");
@@ -52,13 +53,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         mAgencias.setText("Agências");
 
-        miCadastrar.setText("Cadastrar");
-        miCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        miCadastrarAgencias.setText("Cadastrar");
+        miCadastrarAgencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miCadastrarActionPerformed(evt);
+                miCadastrarAgenciasActionPerformed(evt);
             }
         });
-        mAgencias.add(miCadastrar);
+        mAgencias.add(miCadastrarAgencias);
+
+        miListarAgencias.setText("Listar");
+        miListarAgencias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miListarAgenciasActionPerformed(evt);
+            }
+        });
+        mAgencias.add(miListarAgencias);
 
         jMenuBar1.add(mAgencias);
 
@@ -85,13 +94,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void miCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCadastrarActionPerformed
+    private void miCadastrarAgenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCadastrarAgenciasActionPerformed
         // TODO add your handling code here:
         // Tela Cadastro de Agências
         new TelaCadastroAgencias(this).setVisible(true);
         
         this.setEnabled(false);
-    }//GEN-LAST:event_miCadastrarActionPerformed
+    }//GEN-LAST:event_miCadastrarAgenciasActionPerformed
+
+    private void miListarAgenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListarAgenciasActionPerformed
+        // TODO add your handling code here:
+        // Tela de Listagem de Agências
+        new TelaListarAgencias(this).setVisible(true);
+        
+        this.setEnabled(false);
+    }//GEN-LAST:event_miListarAgenciasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -133,6 +150,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lbUsuario;
     private javax.swing.JMenu mAgencias;
     private javax.swing.JMenu mArquivo;
-    private javax.swing.JMenuItem miCadastrar;
+    private javax.swing.JMenuItem miCadastrarAgencias;
+    private javax.swing.JMenuItem miListarAgencias;
     // End of variables declaration//GEN-END:variables
 }

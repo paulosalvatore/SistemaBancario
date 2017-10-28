@@ -128,6 +128,8 @@ public class TelaCadastroAgencias extends javax.swing.JFrame {
 
             if (adicionado) {
                 JOptionPane.showMessageDialog(this, "Agência adicionada com sucesso.");
+                
+                this.dispose();
             }
             else {
                 JOptionPane.showMessageDialog(this, "Agência não foi adicionada. Tente novamente.");

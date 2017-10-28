@@ -54,7 +54,7 @@ public class Conectar {
     }
 
     public static boolean inserirRegistro(String tabela, List<String> colunas, List<String> valores) {
-        String sql = "INSERT INTO " + tabela + "(";
+        String sql = "INSERT INTO " + tabela + " (";
 
         for (int chave = 0; chave < colunas.size(); chave++) {
             String coluna = colunas.get(chave);
@@ -99,7 +99,7 @@ public class Conectar {
         }
     }
 
-    public static void editarRegistro(String tabela, int id, List<String> colunas, List<String> valores) {
+    public static boolean editarRegistro(String tabela, int id, List<String> colunas, List<String> valores) {
         String sql = "UPDATE " + tabela + " SET ";
 
         Date dataUtil = new Date();
@@ -132,18 +132,59 @@ public class Conectar {
             statement = conexao.createStatement();
             statement.executeUpdate(sql);
             System.out.println("Registro editado com sucesso.");
+            
+            return true;
         } catch (Exception e) {
             System.out.println(e);
+            
+            return false;
         }
     }
     
-    public static void deletarRegistro(String tabela, int id) {
+    public static boolean deletarRegistro(String tabela, int id) {
         List<String> colunas = new ArrayList<>();
         colunas.add("ativo");
         
         List<String> valores = new ArrayList<>();
         valores.add("0");
         
-        editarRegistro(tabela, id, colunas, valores);
+        return editarRegistro(tabela, id, colunas, valores);
+    }
+    
+    public static ResultSet buscarRegistro(String tabela, List<String> colunas, List<String> valores) {
+        String sql = "SELECT * FROM " + tabela + " WHERE (";
+        
+        for (int chave = 0; chave < colunas.size(); chave++) {
+            String coluna = colunas.get(chave);
+            String valor = valores.get(chave);
+
+            sql += coluna + " LIKE '" + valor + "'";
+
+            if (chave < colunas.size() - 1) {
+                sql += " AND ";
+            }
+
+            System.out.println(sql);
+        }
+        
+        sql += ")";
+        
+        System.out.println(sql);
+        
+        conexao = Conectar.iniciarConexao();
+        
+        resultSet = null;
+        
+        try {
+            preparedStatement = conexao.prepareStatement(sql);
+            
+            resultSet = preparedStatement.executeQuery();
+            
+            System.out.println("Busca realizada com sucesso.");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        return resultSet;
     }
 }
